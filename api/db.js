@@ -7,3 +7,7 @@ export const db = new pg.Client({
     database: "blog",
     password: process.env.DB_KEY,
 });
+
+db.connect()
+  .then(() => console.log("Database connected successfully"))
+  .catch((err) => console.error("Database connection error:", err));
