@@ -25,7 +25,7 @@ export default function Register() {
       navigate("/login");
     } catch (err) {
       console.log(err);
-      setError(err);
+      setError(err.response?.data || "An unexpected error occurred");
     }
   };
 

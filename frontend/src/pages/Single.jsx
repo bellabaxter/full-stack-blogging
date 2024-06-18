@@ -1,53 +1,78 @@
 
-import React from "react";
+import React, { useContext, useEffect, useState} from "react";
 import Edit from "../img/edit.png";
 import Delete from "../img/delete.png";
-import { Link } from "react-router-dom";
+import { Link,useLocation,useNavigate } from "react-router-dom";
 import Menu from "../components/Menu";
+import axios from "axios";
+import moment from "moment";
+import { AuthContext } from "../context/authContext";
+import DOMPurify from "dompurify";
+
 
 export default function Single() {
-    return(
-        <div className="single">
-            <div className="content">
-                <img src="https://images.unsplash.com/photo-1575936123452-b67c3203c357?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D " alt=""/>
-                <div className="user">
-                    <img src="https://t4.ftcdn.net/jpg/03/83/25/83/360_F_383258331_D8imaEMl8Q3lf7EKU2Pi78Cn0R7KkW9o.jpg" alt=""/>
-                    <div className="info">
-                        <span className="username">Bella
-                            <span>
-                            Posted 2 days ago
-                            </span>
-                        </span>
-                        
-                    </div>
 
-                    <div className="edit">
-                        <Link to = {`/write?edit=7`}>
-                            <img src={Edit} ></img>
-                        </Link>
-                        <img src={Delete}></img>
-                    </div>
-                </div>
-                    <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit</h1>
-                    <p>
-                        <p>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!
-                        </p> 
-                        <br/> 
-                        <br/> 
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus doloribus reprehenderit neque blanditiis itaque repudiandae dolore ad tempore culpa minus laudantium, perferendis aut dolores, assumenda sunt autem beatae qui nemo!Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!
-                        </p>
-                        <br/> 
-                        <br/> 
-                        <p>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis! Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!
-                        </p>
-                    </p> 
-                </div> 
-            <div className="menu">
-                <Menu />
+  const [post, setPost] = useState({});
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const postId = location.pathname.split("/")[2];
+
+  const { currentUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8000/api/posts/${postId}`);
+        setPost(res.data);
+        console.log(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, [postId]);
+
+  const handleDelete = async ()=>{
+    try {
+      await axios.delete(`http://localhost:8000/api/posts/${postId}` ,{withCredentials: true});
+      navigate("/")
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+
+  return (
+    <div className="single">
+      <div className="content">
+      <img src={`../uploads/${post?.postimg}`} alt="" />
+        <div className="user">
+          {post.userImg && <img
+            src={post.userImg}
+            alt=""
+          />}
+          <div className="info">
+            <span>{post.username}</span>
+            <p>Posted {moment(post.date).fromNow()}</p>
+          </div>
+          {currentUser?.username === post.username && (
+            <div className="edit">
+              <Link to={`/write?edit=${post.id}`} state={post}>
+                <img src={Edit} alt="" />
+              </Link>
+              <img onClick={handleDelete} src={Delete} alt="" />
             </div>
+          )}
         </div>
-    );
-}
+        <h1>{post.title}</h1>
+        <p
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(post.content),
+          }}
+        ></p>      </div>
+      <Menu cat={post.cat}/>
+    </div>
+  );
+};
