@@ -10,7 +10,7 @@ import fs from "fs";
 import { randomBytes } from 'crypto';
 
 const app = express();
-const port = 8000;
+const port = process.env.PORT;
 
 app.use(cors({
     origin: 'http://localhost:5173',
