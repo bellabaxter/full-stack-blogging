@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import multer from "multer";
 import path from "path";
 import fs from "fs";
+import { randomBytes } from 'crypto';
 
 const app = express();
 const port = 8000;
@@ -30,7 +31,8 @@ const storage = multer.diskStorage({
         cb(null, uploadDir);
     },
     filename: function (req, file, cb) {
-        cb(null, Date.now() + path.extname(file.originalname));
+        cb(null,file.fieldname + '_' + Date.now() 
+        + path.extname(file.originalname));
     }
 });
 

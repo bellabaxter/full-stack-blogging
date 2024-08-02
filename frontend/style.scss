@@ -11,7 +11,7 @@ $noto-sans: 'Noto Sans', sans-serif;
     justify-content: center;
     display: flex;
     .contanier{
-        width: 1024px;
+        width: 100%;
 
             .link{
                 text-decoration: none;
@@ -78,14 +78,14 @@ $noto-sans: 'Noto Sans', sans-serif;
         //NAVBAR
         .navbar{
             .container{
-                padding: 10px 0px;
+                padding-left: 100px;
+                padding-right: 100px;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 .logo img{
                     height: 120px;
                     width: 120px;
-                    //object-fit: cover;
                     border-radius: 50%;
                 }
                 .links{
@@ -128,8 +128,9 @@ $noto-sans: 'Noto Sans', sans-serif;
 
         //FOOTER
         footer{
+            
             margin-top: 100px;
-            padding: 20px;
+            padding: 30px;
             display: flex;
             background-color: $lightbrown;
             align-items: center;
@@ -148,7 +149,8 @@ $noto-sans: 'Noto Sans', sans-serif;
         //HOME
 
         .home{
-
+            padding-left: 100px;
+            padding-right: 100px;
             .posts{
                 margin-top: 50px;
                 display: flex;
@@ -226,6 +228,8 @@ $noto-sans: 'Noto Sans', sans-serif;
         //SINGLE
 
         .single{
+            padding-left: 100px;
+            padding-right: 100px;
             display: flex;
             gap: 50px;
 
@@ -342,6 +346,8 @@ $noto-sans: 'Noto Sans', sans-serif;
         //WRITE
 
         .add {
+            padding-left: 100px;
+            padding-right: 100px;
             margin-top: 20px;
             display: flex;
             gap: 20px;

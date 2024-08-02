@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import axios from "axios";
@@ -13,10 +13,10 @@ export default function Write() {
   const [file, setFile] = useState(null);
   const [cat, setCat] = useState(state?.cat || "");
 
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const upload = async () => {
+    
     try {
       const formData = new FormData();
       formData.append("file", file);
@@ -31,21 +31,22 @@ export default function Write() {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    const imgUrl = await upload();
+
+    let imgUrl = await upload();
 
     try {
       state
          ? await axios.put(`http://localhost:8000/api/posts/${state.id}`, {
-         title,
+            title,
             content: value,
             cat,
-            img: file ? imgUrl : "",
+            img: imgUrl,
           },{withCredentials: true})
         : await axios.post("http://localhost:8000/api/posts/", {
             title,
             content: value,
             cat,
-            img: file ? imgUrl : "",
+            img: imgUrl,
             date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
           },{withCredentials: true});
           navigate("/")
@@ -53,8 +54,6 @@ export default function Write() {
       console.log(err);
     }
   };
-
-
 
   return (
     <div className="add">

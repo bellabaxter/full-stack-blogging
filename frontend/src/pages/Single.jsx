@@ -49,8 +49,8 @@ export default function Single() {
       <div className="content">
       <img src={`../uploads/${post?.postimg}`} alt="" />
         <div className="user">
-          {post.userImg && <img
-            src={post.userImg}
+          {post.userimg && <img
+            src={post.userimg}
             alt=""
           />}
           <div className="info">
