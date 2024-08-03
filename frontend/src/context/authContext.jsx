@@ -20,7 +20,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axios.post("http://localhost:8000/api/signup/logout", null, {withCredentials: true});
+      await axios.post("https://full-stack-blogging-front.onrender.com/api/signup/logout", null, {withCredentials: true});
       setCurrentUser(null);
       localStorage.removeItem("user");
     } catch (error) {
