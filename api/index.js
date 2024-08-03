@@ -7,7 +7,6 @@ import cookieParser from "cookie-parser";
 import multer from "multer";
 import path from "path";
 import fs from "fs";
-import { randomBytes } from 'crypto';
 
 const app = express();
 const port = process.env.PORT;
