@@ -51,7 +51,7 @@ export const login = (req, res) => {
       const { password, ...other } = data.rows[0];
       res
         .cookie("access_token", token, {
-          httpsOnly: true, 
+          httpOnly: true, 
           secure: true, // Set to true in production
           sameSite: 'None' , // Adjust for cross-site requests
           //domain: process.env.NODE_ENV === 'production' ? 'full-stack-blogging-front.onrender.com' : undefined, // Replace with your domain
