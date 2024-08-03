@@ -52,6 +52,9 @@ export const login = (req, res) => {
       res
         .cookie("access_token", token, {
           httpOnly: true,
+          secure: process.env.NODE_ENV === 'production', // Set to true in production
+          sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax', // Adjust for cross-site requests
+          domain: process.env.NODE_ENV === 'production' ? 'full-stack-blogging-front.onrender.com' : undefined, // Replace with your domain
         })
         res.status(200)
         .json(other);

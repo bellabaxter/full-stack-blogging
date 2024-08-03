@@ -19,7 +19,7 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-const uploadDir = path.resolve("../frontend/public/uploads");
+const uploadDir = path.resolve("../frontend/dist/uploads");
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
 }
