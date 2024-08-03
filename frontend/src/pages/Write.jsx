@@ -20,7 +20,7 @@ export default function Write() {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const res = await axios.post("http://localhost:8000/api/upload", formData, {
+      const res = await axios.post("https://full-stack-blogging.onrender.com/api/upload", formData, {
         withCredentials: true});
       return res.data;
     } catch (err) {
