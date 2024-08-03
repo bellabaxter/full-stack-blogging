@@ -12,7 +12,7 @@ const app = express();
 const port = process.env.PORT;
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://full-stack-blogging-front.onrender.com',
     credentials: true
 }));
 
