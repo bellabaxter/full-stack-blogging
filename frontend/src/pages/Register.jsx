@@ -20,7 +20,7 @@ export default function Register() {
   const handleSubmit = async (e) => {
      e.preventDefault();
     try {
-      let res = await axios.post("http://localhost:8000/api/signup/register",inputs)
+      let res = await axios.post("https://full-stack-blogging.onrender.com/api/signup/register",inputs)
       console.log(res);
       navigate("/login");
     } catch (err) {
