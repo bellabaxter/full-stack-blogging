@@ -10,6 +10,9 @@ import 'dotenv/config';
 
 export const db = new pg.Client({
   connectionString: process.env.POSTGRES_URL,
+  ssl: {
+    rejectUnauthorized: false, // Use this option if your database server requires SSL
+  },
 })
 
 db.connect()
