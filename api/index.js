@@ -11,10 +11,10 @@ import fs from "fs";
 const app = express();
 const port = process.env.PORT;
 
-// app.use(cors({
-//     origin: 'https://full-stack-blogging-frontend-9zoz3s5lb-mahaks-projects-d83aed4b.vercel.app/',
-//     credentials: true
-// }));
+app.use(cors({
+    origin: 'https://full-stack-blogging-front.onrender.com/',
+    credentials: true
+}));
 
 app.use(express.json());
 app.use(cookieParser());
