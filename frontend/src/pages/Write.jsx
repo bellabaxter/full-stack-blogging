@@ -5,7 +5,6 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
 
-
 export default function Write() {
   const state = useLocation().state;
   const [value, setValue] = useState(state?.content || "");
@@ -16,18 +15,23 @@ export default function Write() {
   const navigate = useNavigate();
 
   const upload = async () => {
-    
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const res = await axios.post("https://full-stack-blogging.onrender.com/api/upload", formData, {
-        withCredentials: true});
+      // const res = await axios.post("https://full-stack-blogging.onrender.com/api/upload", formData, {
+      //   withCredentials: true});
+      const res = await axios.post(
+        "http://localhost:8000/api/upload",
+        formData,
+        {
+          withCredentials: true,
+        }
+      );
       return res.data;
     } catch (err) {
       console.log(err);
     }
   };
-
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -36,20 +40,30 @@ export default function Write() {
 
     try {
       state
-         ? await axios.put(`https://full-stack-blogging.onrender.com/api/posts/${state.id}`, {
-            title,
-            content: value,
-            cat,
-            img: imgUrl,
-          },{withCredentials: true})
-        : await axios.post("https://full-stack-blogging.onrender.com/api/posts/", {
-            title,
-            content: value,
-            cat,
-            img: imgUrl,
-            date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
-          },{withCredentials: true});
-          navigate("/")
+        ? //  ? await axios.put(`https://full-stack-blogging.onrender.com/api/posts/${state.id}`, {
+          await axios.put(
+            `http://localhost:8000/api/posts/${state.id}`,
+            {
+              title,
+              content: value,
+              cat,
+              img: imgUrl,
+            },
+            { withCredentials: true }
+          )
+        : // : await axios.post("https://full-stack-blogging.onrender.com/api/posts/", {
+          await axios.post(
+            "http://localhost:8000/api/posts/",
+            {
+              title,
+              content: value,
+              cat,
+              img: imgUrl,
+              date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+            },
+            { withCredentials: true }
+          );
+      navigate("/");
     } catch (err) {
       console.log(err);
     }
@@ -169,6 +183,4 @@ export default function Write() {
       </div>
     </div>
   );
-};
-
-
+}

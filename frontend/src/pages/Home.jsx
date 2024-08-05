@@ -11,7 +11,8 @@ export default function Home() {
   useEffect(()=>{
     const fetchData = async()=>{
       try{
-        const res=await axios.get(`https://full-stack-blogging.onrender.com/api/posts${cat}`)
+        // const res=await axios.get(`https://full-stack-blogging.onrender.com/api/posts${cat}`)
+        const res=await axios.get(`http://localhost:8000/api/posts${cat}`)
         setPosts(res.data)
       } catch(err){
         console.log(err);

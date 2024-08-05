@@ -1,2 +1,12 @@
-#dependencies
-/node_modules/
+# Ignore node_modules folder
+node_modules/
+
+# Ignore log files
+*.log
+
+# Ignore dist folder
+/dist
+
+# Ignore other directories or files
+.DS_Store
+.env

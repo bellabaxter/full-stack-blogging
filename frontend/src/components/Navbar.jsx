@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import Logo from "../img/logo.png";
 import {Link} from "react-router-dom";
-import { useContext } from "react";
 import { AuthContext } from "../context/authContext.jsx";
 
 export default function Navbar() {
