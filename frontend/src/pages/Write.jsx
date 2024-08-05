@@ -18,15 +18,15 @@ export default function Write() {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      // const res = await axios.post("https://full-stack-blogging.onrender.com/api/upload", formData, {
-      //   withCredentials: true});
-      const res = await axios.post(
-        "http://localhost:8000/api/upload",
-        formData,
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.post("https://full-stack-blogging.onrender.com/api/upload", formData, {
+        withCredentials: true});
+      // const res = await axios.post(
+      //   "http://localhost:8000/api/upload",
+      //   formData,
+      //   {
+      //     withCredentials: true,
+      //   }
+      // );
       return res.data;
     } catch (err) {
       console.log(err);
@@ -42,7 +42,7 @@ export default function Write() {
       state
         ? //  ? await axios.put(`https://full-stack-blogging.onrender.com/api/posts/${state.id}`, {
           await axios.put(
-            `http://localhost:8000/api/posts/${state.id}`,
+            `https://full-stack-blogging.onrender.com/api/posts/${state.id}`,
             {
               title,
               content: value,
@@ -53,7 +53,7 @@ export default function Write() {
           )
         : // : await axios.post("https://full-stack-blogging.onrender.com/api/posts/", {
           await axios.post(
-            "http://localhost:8000/api/posts/",
+            "https://full-stack-blogging.onrender.com/api/posts/",
             {
               title,
               content: value,

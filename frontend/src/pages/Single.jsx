@@ -24,7 +24,7 @@ export default function Single() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-         const res = await axios.get(`https://full-stack-blogging-api.vercel.app/api/posts/${postId}`);
+         const res = await axios.get(`https://full-stack-blogging.onrender.com/api/posts/${postId}`);
         //const res = await axios.get(`http://localhost:8000/api/posts/${postId}`);
         setPost(res.data);
         console.log(res.data);
@@ -37,7 +37,7 @@ export default function Single() {
 
   const handleDelete = async ()=>{
     try {
-      await axios.delete(`https://full-stack-blogging-api.vercel.app/api/posts/${postId}` ,{withCredentials: true});
+      await axios.delete(`https://full-stack-blogging.onrender.com/api/posts/${postId}` ,{withCredentials: true});
       //await axios.delete(`http://localhost:8000/api/posts/${postId}` ,{withCredentials: true});
       navigate("/")
     } catch (err) {
