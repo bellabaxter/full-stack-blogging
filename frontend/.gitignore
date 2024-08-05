@@ -10,3 +10,4 @@ node_modules/
 # Ignore other directories or files
 .DS_Store
 .env
+.vercel
