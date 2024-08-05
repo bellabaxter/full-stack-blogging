@@ -186,7 +186,7 @@
 // }
 
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import axios from "axios";
@@ -208,7 +208,7 @@ export default function Write() {
       formData.append("file", file);
 
       // Adjust the URL if needed, based on your deployment
-      const res = await axios.post("http://localhost:8000/api/upload", formData, {
+      const res = await axios.post("https://full-stack-blogging-api.vercel.app/api/upload", formData, {
         withCredentials: true,
       });
 
