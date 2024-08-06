@@ -12,9 +12,9 @@ const app = express();
 const port = process.env.PORT;
 
 app.use(cors({
-   // origin: 'https://full-stack-blogging-front.onrender.com',
+   origin: 'https://full-stack-blogging-front.onrender.com',
     //origin: 'http://localhost:5173', 
-    origin: "https://full-stack-blogging-frontend-8tlknw12j-mahaks-projects-d83aed4b.vercel.app",
+   // origin: "https://full-stack-blogging-frontend-8tlknw12j-mahaks-projects-d83aed4b.vercel.app",
     credentials: true
 }));
 
