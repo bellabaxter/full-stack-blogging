@@ -10,7 +10,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const login = async (inputs) => {
     try {
-      const res = await axios.post("https://full-stack-blogging-backend.onrender.com/api/signup/login", inputs,{withCredentials: true});
+      const res = await axios.post("https://full-stack-blogging.onrender.com/api/signup/login", inputs,{withCredentials: true});
       //const res = await axios.post("http://localhost:8000/api/signup/login", inputs,{withCredentials: true});
 
       const { token, ...userData } = res.data;
