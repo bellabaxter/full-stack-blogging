@@ -15,9 +15,13 @@ export const AuthContextProvider = ({ children }) => {
 
       const { token, ...userData } = res.data;
 
-      localStorage.setItem("authToken", token);
-      localStorage.setItem("user", JSON.stringify(res.data));
-      setCurrentUser(userData);
+      // localStorage.setItem("authToken", token);
+      // localStorage.setItem("user", JSON.stringify(res.data));
+      // setCurrentUser(userData);
+
+      setAuthToken(res.data.token);
+      setCurrentUser(res.data.other);
+
     } catch (error) {
       console.error("Login error:", error);
     }
@@ -27,9 +31,13 @@ export const AuthContextProvider = ({ children }) => {
     try {
       await axios.post("https://full-stack-blogging-backend.onrender.com/api/signup/logout", null, {withCredentials: true});
       //await axios.post("http://localhost:8000/api/signup/logout", null, {withCredentials: true});
-      localStorage.removeItem("user");
-      localStorage.removeItem("authToken");
+      // localStorage.removeItem("user");
+      // localStorage.removeItem("authToken");
+      //setCurrentUser(null);
+
+      setAuthToken(null);
       setCurrentUser(null);
+
     } catch (error) {
       console.error("Logout error:", error);
     }
