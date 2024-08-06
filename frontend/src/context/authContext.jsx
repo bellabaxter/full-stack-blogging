@@ -13,14 +13,14 @@ export const AuthContextProvider = ({ children }) => {
       const res = await axios.post("https://full-stack-blogging.onrender.com/api/signup/login", inputs,{withCredentials: true});
       //const res = await axios.post("http://localhost:8000/api/signup/login", inputs,{withCredentials: true});
 
-      const { token, ...userData } = res.data;
+      const { token, other } = res.data;
 
       // localStorage.setItem("authToken", token);
       // localStorage.setItem("user", JSON.stringify(res.data));
       // setCurrentUser(userData);
 
-      setAuthToken(res.data.token);
-      setCurrentUser(res.data.other);
+      setAuthToken(token);
+      setCurrentUser(other);
 
     } catch (error) {
       console.error("Login error:", error);
@@ -43,10 +43,10 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-  //  localStorage.setItem("user", JSON.stringify(currentUser));
-  //setCurrentUser(currentUser)
-  }, [currentUser]);
+  // useEffect(() => {
+  // //  localStorage.setItem("user", JSON.stringify(currentUser));
+  // //setCurrentUser(currentUser)
+  // }, [currentUser]);
 
   return (
     <AuthContext.Provider value={{ currentUser, login, logout }}>
