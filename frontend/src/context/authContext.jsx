@@ -13,7 +13,7 @@ export const AuthContextProvider = ({ children }) => {
       const res = await axios.post("https://full-stack-blogging.onrender.com/api/signup/login", inputs,{withCredentials: true});
       //const res = await axios.post("http://localhost:8000/api/signup/login", inputs,{withCredentials: true});
 
-      const { token, other } = res.data;
+      const { other, token } = res.data;
 
       // localStorage.setItem("authToken", token);
       // localStorage.setItem("user", JSON.stringify(res.data));
