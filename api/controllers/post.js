@@ -51,7 +51,7 @@ export const addPost = (req,res) => {
   const values = [
     req.body.title,
     req.body.content,
-    req.userInfo.id,
+    userInfo.id,
     req.body.date,
     req.body.img,
     req.body.cat,
