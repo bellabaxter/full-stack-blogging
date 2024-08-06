@@ -53,21 +53,23 @@ export const login = (req, res) => {
       const userId=data.rows[0].id;
       const token = jwt.sign({id :userId}, process.env.JWT_KEY);
       const { password, ...other } = data.rows[0];
-      res
-        .cookie("access_token", token, {
-          httpOnly: true, 
-          // secure: true, // Set to true in production
-          // sameSite: 'None' , // Adjust for cross-site requests
-          // //domain: process.env.NODE_ENV === 'production' ? 'full-stack-blogging-front.onrender.com' : undefined, // Replace with your domain
-        })
-        res.status(200)
-        .json(other);
+      // res
+      //   .cookie("access_token", token, {
+      //     httpOnly: true, 
+      //     // secure: true, // Set to true in production
+      //     // sameSite: 'None' , // Adjust for cross-site requests
+      //     // //domain: process.env.NODE_ENV === 'production' ? 'full-stack-blogging-front.onrender.com' : undefined, // Replace with your domain
+      //   })
+        return res.status(201).json({other, token})
+        // res.status(200)
+        // .json(other);
      });
   };
 
 export const logout = (req, res) => {
-    res.clearCookie("access_token",{
-      sameSite:"none",
-      secure:true
-    }).status(200).json("User has been logged out.")
+    // res.clearCookie("access_token",{
+    //   sameSite:"none",
+    //   secure:true
+    // }).status(200).json("User has been logged out.")
+    res.status(200).json("User has been logged out.")
 };
