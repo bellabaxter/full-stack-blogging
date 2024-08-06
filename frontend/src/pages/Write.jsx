@@ -18,14 +18,10 @@ export default function Write() {
     try {
       const formData = new FormData();
       formData.append("file", file);
-     const res = await axios.post("https://full-stack-blogging-backend.onrender.com/api/upload", formData, {
-       withCredentials: true});
+    const res = await axios.post("https://full-stack-blogging-backend.onrender.com/api/upload", formData);
       // const res = await axios.post(
       //   "http://localhost:8000/api/upload",
       //   formData,
-      //   {
-      //     withCredentials: true,
-      //   }
       // );
       return res.data;
     } catch (err) {
@@ -37,10 +33,19 @@ export default function Write() {
     e.preventDefault();
 
     let imgUrl = await upload();
+    const token = localStorage.getItem("authToken");
+    //console.log(token);
+    
+
+    const config  = {
+      headers: {
+         Authorization: `Bearer ${token}`
+      }
+    }
 
     try {
       state
-        ? //await axios.put(`http://localhost:8000/api/posts/${state.id}`,
+        ?// await axios.put(`http://localhost:8000/api/posts/${state.id}`,
           await axios.put(
             `https://full-stack-blogging-backend.onrender.com/api/posts/${state.id}`,
             {
@@ -49,9 +54,9 @@ export default function Write() {
               cat,
               img: imgUrl,
             },
-            { withCredentials: true }
-          )
-        :   //await axios.post("http://localhost:8000/api/posts/", 
+            config
+           )
+        :  // await axios.post("http://localhost:8000/api/posts/", 
           await axios.post(
             "https://full-stack-blogging-backend.onrender.com/api/posts/",
             {
@@ -61,8 +66,8 @@ export default function Write() {
               img: imgUrl,
               date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
             },
-             { withCredentials: true }
-          );
+            config
+           );
       navigate("/");
     } catch (err) {
       console.log(err);

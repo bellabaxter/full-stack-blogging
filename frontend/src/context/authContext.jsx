@@ -12,8 +12,12 @@ export const AuthContextProvider = ({ children }) => {
     try {
       const res = await axios.post("https://full-stack-blogging-backend.onrender.com/api/signup/login", inputs,{withCredentials: true});
       //const res = await axios.post("http://localhost:8000/api/signup/login", inputs,{withCredentials: true});
-      setCurrentUser(res.data);
+
+      const { token, ...userData } = res.data;
+
+      localStorage.setItem("authToken", token);
       localStorage.setItem("user", JSON.stringify(res.data));
+      setCurrentUser(userData);
     } catch (error) {
       console.error("Login error:", error);
     }
@@ -23,8 +27,9 @@ export const AuthContextProvider = ({ children }) => {
     try {
       await axios.post("https://full-stack-blogging-backend.onrender.com/api/signup/logout", null, {withCredentials: true});
       //await axios.post("http://localhost:8000/api/signup/logout", null, {withCredentials: true});
-      setCurrentUser(null);
       localStorage.removeItem("user");
+      localStorage.removeItem("authToken");
+      setCurrentUser(null);
     } catch (error) {
       console.error("Logout error:", error);
     }
