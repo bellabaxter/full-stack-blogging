@@ -19,8 +19,8 @@ export const AuthContextProvider = ({ children }) => {
       // localStorage.setItem("user", JSON.stringify(res.data));
       // setCurrentUser(userData);
 
-      setAuthToken(res.token);
-      setCurrentUser(res.other);
+      setAuthToken(res.data.token);
+      setCurrentUser(res.data.other);
 
     } catch (error) {
       console.error("Login error:", error);
