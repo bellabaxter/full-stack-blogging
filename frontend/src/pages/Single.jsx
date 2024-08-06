@@ -21,10 +21,10 @@ export default function Single() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        //const res = await axios.get(`https://full-stack-blogging-backend.onrender.com/api/posts/${postId}`);
-        const res = await axios.get(
-          `http://localhost:8000/api/posts/${postId}`
-        );
+        const res = await axios.get(`https://full-stack-blogging.onrender.com/api/posts/${postId}`);
+        // const res = await axios.get(
+        //   `http://localhost:8000/api/posts/${postId}`
+        // );
         setPost(res.data);
         console.log(res.data);
       } catch (err) {
@@ -43,7 +43,7 @@ export default function Single() {
         },
       };
 
-      await axios.delete(`https://full-stack-blogging-backend.onrender.com/api/posts/${postId}` ,config);
+      await axios.delete(`https://full-stack-blogging.onrender.com/api/posts/${postId}` ,config);
      // await axios.delete(`http://localhost:8000/api/posts/${postId}`,config);
       navigate("/");
     } catch (err) {
