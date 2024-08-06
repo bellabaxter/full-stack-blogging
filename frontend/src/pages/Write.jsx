@@ -4,6 +4,7 @@ import "react-quill/dist/quill.snow.css";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
+import { AuthContext } from "../context/authContext.jsx";
 
 export default function Write() {
   const state = useLocation().state;
@@ -11,6 +12,8 @@ export default function Write() {
   const [title, setTitle] = useState(state?.title || "");
   const [file, setFile] = useState(null);
   const [cat, setCat] = useState(state?.cat || "");
+
+  const { authToken } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -33,13 +36,13 @@ export default function Write() {
     e.preventDefault();
 
     let imgUrl = await upload();
-    const token = localStorage.getItem("authToken");
+   // const token = localStorage.getItem("authToken");
     //console.log(token);
     
 
     const config  = {
       headers: {
-         Authorization: `Bearer ${token}`
+         Authorization: `Bearer ${authToken}`
       }
     }
 

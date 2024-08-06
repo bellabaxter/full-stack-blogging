@@ -16,7 +16,7 @@ export default function Single() {
 
   const postId = location.pathname.split("/")[2];
 
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser,authToken } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,10 +36,10 @@ export default function Single() {
 
   const handleDelete = async () => {
     try {
-      const token = localStorage.getItem("authToken");
+      //const token = localStorage.getItem("authToken");
       const config = {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${authToken}`,
         },
       };
 
@@ -61,7 +61,7 @@ export default function Single() {
             <span>{post.username}</span>
             <p>Posted {moment(post.date).fromNow()}</p>
           </div>
-          {currentUser?.other.username === post.username && (
+          {currentUser?.username === post.username && (
             <div className="edit">
               <Link to={`/write?edit=${post.id}`} state={post}>
                 <img src={Edit} alt="" />
