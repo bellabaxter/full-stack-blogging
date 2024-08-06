@@ -1,6 +1,10 @@
 import {db} from "../db.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 
 export const register = (req,res) => {
     const saltRounds = 10;
@@ -47,14 +51,14 @@ export const login = (req, res) => {
         return res.status(400).json("Wrong username or password!");
 
       const userId=data.rows[0].id;
-      const token = jwt.sign({id :userId}, "jwtkey");
+      const token = jwt.sign({id :userId}, process.env.JWT_KEY);
       const { password, ...other } = data.rows[0];
       res
         .cookie("access_token", token, {
           httpOnly: true, 
-          secure: true, // Set to true in production
-          sameSite: 'None' , // Adjust for cross-site requests
-          //domain: process.env.NODE_ENV === 'production' ? 'full-stack-blogging-front.onrender.com' : undefined, // Replace with your domain
+          // secure: true, // Set to true in production
+          // sameSite: 'None' , // Adjust for cross-site requests
+          // //domain: process.env.NODE_ENV === 'production' ? 'full-stack-blogging-front.onrender.com' : undefined, // Replace with your domain
         })
         res.status(200)
         .json(other);

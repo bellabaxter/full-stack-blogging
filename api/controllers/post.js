@@ -1,5 +1,9 @@
 import {db} from "../db.js";
 import  jwt from "jsonwebtoken";
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 
 export const getPosts = (req,res) => {
     const q = req.query.cat 
@@ -38,7 +42,7 @@ export const addPost = (req,res) => {
 
   if (!token) return res.status(401).json("Not authenticated!");
 
-  jwt.verify(token, "jwtkey", (err, userInfo) => {
+  jwt.verify(token, process.env.JWT_KEY, (err, userInfo) => {
     if (err) return res.status(403).json("Token is not valid!");
 
     const q =
@@ -65,7 +69,7 @@ export const deletePost = (req, res) => {
 
   if (!token) return res.status(401).json("Not authenticated!");
 
-  jwt.verify(token, "jwtkey", (err, userInfo) => {
+  jwt.verify(token, process.env.JWT_KEY, (err, userInfo) => {
     if (err) return res.status(403).json("Token is not valid!");
 
   const postId = req.params.id;
@@ -83,7 +87,7 @@ export const updatePost = (req,res) => {
 
   if (!token) return res.status(401).json("Not authenticated!");
 
-  jwt.verify(token, "jwtkey", (err, userInfo) => {
+  jwt.verify(token, process.env.JWT_KEY, (err, userInfo) => {
     if (err) return res.status(403).json("Token is not valid!");
 
     const postId = req.params.id;
