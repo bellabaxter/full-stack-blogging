@@ -45,7 +45,7 @@ app.post("/api/upload", upload.single("file"), function (req, res) {
     if (!file) {
         return res.status(400).json({ error: "No file uploaded" });
     }
-    res.status(200).json(file.filename);
+    res.status(200).json({ filename: file.filename, path: `/frontend/public/uploads/${file.filename}` });
 });
 
 
