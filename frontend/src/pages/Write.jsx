@@ -26,7 +26,7 @@ export default function Write() {
       //   "http://localhost:8000/api/upload",
       //   formData,
       // );
-      return res.data;
+      return res.data.path;
     } catch (err) {
       console.log(err);
     }
