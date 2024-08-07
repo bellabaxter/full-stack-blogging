@@ -21,7 +21,7 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-const uploadDir = path.resolve("frontend/dist/uploads");
+const uploadDir = path.resolve("../frontend/dist/uploads");
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
 }
@@ -48,6 +48,7 @@ app.post("/api/upload", upload.single("file"), function (req, res) {
     res.status(200).json({ filename: file.filename });
 });
 
+app.use('/uploads', express.static(path.join(__dirname, '../frontend/dist/uploads')));
 
 app.use("/api/signup", signupRouter);
 app.use("/api/posts", postRouter);
