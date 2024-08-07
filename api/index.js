@@ -12,7 +12,7 @@ const app = express();
 const port = process.env.PORT;
 
 app.use(cors({
-   origin: 'https://full-stack-blogging-front.onrender.com',
+   origin: 'c',
     //origin: 'http://localhost:5173', 
    // origin: "https://full-stack-blogging-frontend-8tlknw12j-mahaks-projects-d83aed4b.vercel.app",
     credentials: true
@@ -21,7 +21,7 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-const uploadDir = path.resolve("../frontend/public/uploads");
+const uploadDir = path.resolve("../frontend/dist/uploads");
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
 }
@@ -45,7 +45,7 @@ app.post("/api/upload", upload.single("file"), function (req, res) {
     if (!file) {
         return res.status(400).json({ error: "No file uploaded" });
     }
-    res.status(200).json({ filename: file.filename, path: `/frontend/public/uploads/${file.filename}` });
+    res.status(200).json({ filename: file.filename });
 });
 
 
