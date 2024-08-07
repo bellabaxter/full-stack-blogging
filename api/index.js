@@ -21,7 +21,7 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-const uploadDir = path.resolve("https://full-stack-blogging-front.onrender.com/frontend/dist/uploads");
+const uploadDir = path.resolve("frontend/dist/uploads");
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
 }
