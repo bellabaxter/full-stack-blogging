@@ -52,7 +52,7 @@ export default function Menu({cat}){
             <h1>Other posts you might like</h1>
             {posts.map(post => (
                 <div className="post" key ={post.id}>
-                    <img src={`../public/uploads/${post?.img}`} alt=""/>
+                    <img src={`..frontend/public/uploads/${post?.img}`} alt=""/>
                     <h2>{post.title}</h2>
                     <button>Read More</button>
                 </div>
